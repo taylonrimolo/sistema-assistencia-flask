@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Assistência Técnica - TI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Painel de Suporte e Manutenção - TI</h1>
+        <p>Sistema de controle de equipamentos em manutenção.</p>
+
+        <!-- Formulário para cadastrar novo equipamento -->
+        <div class="card">
+            <h2>Registrar Novo Equipamento</h2>
+            <form action="/adicionar" method="POST">
+                <label>Nome do Cliente:</label>
+                <input type="text" name="cliente" required placeholder="Ex: João Pedro">
+
+                <label>Equipamento (Desktop / Notebook):</label>
+                <input type="text" name="equipamento" required placeholder="Ex: Notebook Lenovo">
+
+                <label>Defeito Relatado:</label>
+                <input type="text" name="defeito" required placeholder="Ex: Formatação e limpeza">
+
+                <button type="submit">Cadastrar Chamado</button>
+            </form>
+        </div>
+
+        <!-- Tabela com a lista de chamados -->
+        <div class="card">
+            <h2>Equipamentos em Manutenção</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Equipamento</th>
+                        <th>Defeito Relatado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for chamado in chamados %}
+                    <tr>
+                        <td>{{ chamado.id }}</td>
+                        <td>{{ chamado.cliente }}</td>
+                        <td>{{ chamado.equipamento }}</td>
+                        <td>{{ chamado.defeito }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
